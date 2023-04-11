@@ -1,19 +1,24 @@
 - name: Preflight
   tags: always
-  include_tasks: 00-preflight.yml
+  include_tasks: 
+    file: "{{ _os }}/00-preflight.yml"
 
 - name: Install and configure Consul
   tags: config
-  include_tasks: 01-install.yml
+  include_tasks: 
+    file: "{{ _os }}/01-install.yml"
 
 - name: Add services
   tags: services
-  include_tasks: 02-services.yml
+  include_tasks: 
+    file: "{{ _os }}/02-services.yml"
 
 - name: Add configs
   tags: config
-  include_tasks: 03-configs.yml
+  include_tasks: 
+    file: "{{ _os }}/03-configs.yml"
 
 - name: Add scripts
   tags: scripts
-  include_tasks: 04-scripts.yml
+  include_tasks: 
+    file: "{{ _os }}/04-scripts.yml"

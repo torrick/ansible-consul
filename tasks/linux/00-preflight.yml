@@ -96,4 +96,4 @@
     _archive_checksum: "{{ item.split(' ')[0] }}"
   with_items: "{{ _checksums }}"
   when:
-    - "('linux_' + _arch + '.zip') in item"
+    - _archive in item

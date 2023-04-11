@@ -4,6 +4,12 @@
     state: restarted
   when: not skip_handlers
 
+- name: restart consul service
+  win_service:
+    name: consul
+    state: restarted
+  when: not skip_handlers
+
 - name: reload consul
   command: "consul reload"
   environment:
