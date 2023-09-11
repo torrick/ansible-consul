@@ -4,7 +4,7 @@
   delegate_to: localhost
   get_url:
     url: "{{ _archive_url }}"
-    dest: "{{ role_path }}/files/{{ _archive }}"
+    dest: "{{ role_path }}\\files\{{ _archive }}"
     checksum: "sha256:{{ _archive_checksum }}"
   register: _download_archive
   until: _download_archive is succeeded
@@ -31,14 +31,14 @@
   become: false
   delegate_to: localhost
   unarchive:
-    src: "{{ role_path }}/files/{{ _archive }}"
+    src: "{{ role_path }}\\files\\{{ _archive }}"
     dest: "{{ _archive_dir }}"
-    creates: "{{ _archive_dir }}/consul"
+    creates: "{{ _archive_dir }}\consul.exe"
 
 - name: propagate consul binary
   win_copy:
-    src: "{{ _archive_dir }}/consul.exe"
-    dest: "{{ consul_dir }}/consul.exe"
+    src: "{{ _archive_dir }}\consul.exe"
+    dest: "{{ consul_dir }}\consul.exe"
   notify: restart consul service
 
 - name: delete archive directory
@@ -53,8 +53,8 @@
   tags: config
   win_copy:
     content: "{{ consul_config | to_nice_json }}"
-    dest: "{{ consul_dirs.main.path }}/consul.json"
-    validate: "consul validate -config-format=json %s"
+    dest: "{{ consul_dirs.main.path }}\consul.json"
+    validate: "{{ consul_dirs.main.path }}\consul.exe validate -config-format=json %s"
   notify: restart consul service
 
 - name: enable consul

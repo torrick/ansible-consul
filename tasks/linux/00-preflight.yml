@@ -29,6 +29,9 @@
       - consul_version | length
     quiet: true
 
+- debug:
+    var: consul_dirs
+
 - name: check "consul_dirs" variable
   tags: always
   assert:
